@@ -19,7 +19,7 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://sotaycode.github.io/react-tutorial/",
+  "homepage": "https://sotaycode.github.io/cron.sample/",
   "eslintConfig": {
     "extends": [
       "react-app",
