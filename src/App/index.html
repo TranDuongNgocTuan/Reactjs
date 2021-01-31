@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script type="">
+    const ANY_VALUE = "*";
+    const RANGE = "-";
+    const VALUE = ",";
+    const START = "/";
+    const NUMBER = /^\d+$/;
+    const ALL = `[${ANY_VALUE}|${RANGE}|${VALUE}|${START}]`;
+    
+    const SPACE = " ";
+    const EVERY_TIME = `Every $kind $time`;
+    const AT_TIME = `At $kind $time`;
+    const TIME = "$time"
+    const BETWEEN = `between the $kind [$from - $to)`;
+    const PAST_EVERY = "past every $to $kind from $from";
+    const PAST_EVERY_BETWEEN = "past every $very $kind from [$from - $to)"
+
+    function isNumber(number) {
+      const regex = new RegExp(NUMBER);
+      return regex.test(number);
+    }
+
+    function expressionRange(point) {
+      let exp = point.split(RANGE);
+
+      if (!isNumber(exp[0]) && !isNumber(exp[1]))
+        return false;
+
+      if (exp[0].localeCompare(exp[1]) > 0)
+        return false;
+      
+      return exp;
+    }
+
+    function expressionStart(point) {
+      let exp = point.split(START);
+
+      if (!isNumber(exp[0]) && !isNumber(exp[1]))
+        return false;
+
+      if (isNumber(exp[0]) && isNumber(exp[1]))
+        return exp;
+      
+      if (!isNumber(exp[0]) && isNumber(exp[1])) {
+        return [exp[1], ...expressionRange(exp[0])];
+      }
+      
+      return false;
+    }
+
+    function expressionMessageRange(el) {
+      return BETWEEN
+              .replace("$from", el[0])
+              .replace("$to", el[1]);
+    }
+
+    function expressionMessageStart(el) {
+      if (el.length == 3) 
+        return PAST_EVERY_BETWEEN
+                .replace("$very", el[0])
+                .replace("$from", el[1])
+                .replace("$to", el[2]);
+      
+      return PAST_EVERY
+              .replace("$to", el[0])
+              .replace("$from", el[1]);
+    }
+
+    function expressionMessageRange(el, i) {
+      if (i > 0)
+        return TIME.replace("$time", el);
+
+      return AT_TIME.replace("$time", el);
+    }
+
+    function findSyntax(point, i) {
+
+      if (point.search(START) > 0) {
+        return expressionMessageStart(expressionStart(point));
+      }
+
+      if (point.search(RANGE) > 0) {
+        return expressionMessageRange(expressionRange(point));
+      }
+
+      if (isNumber(point)) {
+        return expressionMessageRange(point, i);
+      }
+    }
+
+    function convention(exp) {
+      let message = "";
+      let subExp = exp.split(VALUE);
+
+      for (var i=0; i < subExp.length-1; i++) {
+        message = message
+                .concat(findSyntax(subExp[i], i))
+                .concat(VALUE);
+      }
+
+      return message.concat(findSyntax(subExp[subExp.length-1], i));
+    }
+
+    function expression(exp) {
+      var message = "";
+      let subExp = exp.split(" ");
+
+      if (subExp[0] != "*") {
+        message = message
+                  .concat(SPACE)
+                  .concat(convention(subExp[0]))
+                  .replace("$kind", "second");
+      }
+
+      if (subExp[1] != "*") {
+        message = message
+                  .concat(SPACE)
+                  .concat(convention(subExp[1]))
+                  .replace("$kind", "minute");
+      }
+
+      if (subExp[2] != "*") {
+        message = message
+                  .concat(SPACE)
+                  .concat(convention(subExp[2], "hour"))
+                  .replace(/\$kind/g, "hour");
+      }
+
+      if (subExp[3] != "*") {
+        message = message
+                  .concat(SPACE)
+                  .concat(convention(subExp[3], "day"))
+                  .replace("$kind", "day");
+      }
+
+      if (subExp[4] != "*") {
+        message = message
+                  .concat(SPACE)
+                  .concat(convention(subExp[4], "month"))
+                  .replace("$kind", "day");
+      }
+
+      if (subExp[5] != "*") {
+        message = message
+                  .concat(SPACE)
+                  .concat(convention(subExp[5], "weekday"))
+                  .replace("$kind", "weekday");
+      }
+
+      return message.trim();
+    }
+  </script>
+</body>
+</html>
