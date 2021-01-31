@@ -13,9 +13,9 @@ class Expression extends Component{
     EVERY_TIME: `Every $kind $time`,
     AT_TIME: `At $kind $time`,
     TIME: "$time",
-    BETWEEN: `between the $kind [$from - $to)`,
-    PAST_EVERY: "past every $to $kind from $from",
-    PAST_EVERY_BETWEEN: "past every $very $kind from [$from - $to)",
+    BETWEEN: `Between the $kind [$from - $to)`,
+    PAST_EVERY: "Past every $to $kind from $from",
+    PAST_EVERY_BETWEEN: "Past every $very $kind from [$from - $to)",
   };
 
   isNumber = (number) => {
@@ -24,7 +24,7 @@ class Expression extends Component{
   }
 
   expressionRange = (point) => {
-    let exp = point.split(this.state.RANGE);
+    let exp = String(point).split(this.state.RANGE);
 
     if (!this.isNumber(exp[0]) && !this.isNumber(exp[1]))
       return false;
@@ -36,7 +36,7 @@ class Expression extends Component{
   }
 
   expressionStart = (point) => {
-    let exp = point.split(this.state.START);
+    let exp = String(point).split(this.state.START);
 
     if (!this.isNumber(exp[0]) && !this.isNumber(exp[1]))
       return false;
@@ -69,7 +69,7 @@ class Expression extends Component{
             .replace("$from", el[1]);
   }
 
-  expressionMessageRange = (el, i) => {
+  expressionMessageValue = (el, i) => {
     if (i > 0)
       return this.state.TIME.replace("$time", el);
 
@@ -87,7 +87,7 @@ class Expression extends Component{
     }
 
     if (this.isNumber(point)) {
-      return this.expressionMessageRange(point, i);
+      return this.expressionMessageValue(point, i);
     }
   }
 
@@ -112,12 +112,12 @@ class Expression extends Component{
 
       let messageSecond = this.convention(subExp[0]);
 
-      if (messageSecond === "undefined")
+      if (messageSecond.includes("undefined"))
         return message;
 
       message = message
                 .concat(this.state.SPACE)
-                .concat(this.convention(subExp[0]))
+                .concat(messageSecond)
                 .replace("$kind", "second");
     }
 
@@ -125,12 +125,12 @@ class Expression extends Component{
 
       let messageMinute = this.convention(subExp[1]);
 
-      if (messageMinute === "undefined")
+      if (messageMinute.includes("undefined"))
         return message;
 
       message = message
                 .concat(this.state.SPACE)
-                .concat(this.convention(subExp[1]))
+                .concat(messageMinute)
                 .replace("$kind", "minute");
     }
 
@@ -138,7 +138,7 @@ class Expression extends Component{
       
       let messageHour = this.convention(subExp[2]);
 
-      if (messageHour === "undefined")
+      if (messageHour.includes("undefined"))
         return message;
       
       message = message
@@ -151,12 +151,12 @@ class Expression extends Component{
 
       let messageDay = this.convention(subExp[3]);
 
-      if (messageDay === "undefined")
+      if (messageDay.includes("undefined"))
         return message;
 
       message = message
                 .concat(this.state.SPACE)
-                .concat(this.convention(subExp[3]))
+                .concat(messageDay)
                 .replace("$kind", "day");
     }
 
@@ -164,12 +164,12 @@ class Expression extends Component{
 
       let messageMonth = this.convention(subExp[4]);
 
-      if (messageMonth === "undefined")
+      if (messageMonth.includes("undefined"))
         return message;
 
       message = message
                 .concat(this.state.SPACE)
-                .concat(this.convention(subExp[4]))
+                .concat(messageMonth)
                 .replace("$kind", "month");
     }
 
@@ -177,12 +177,12 @@ class Expression extends Component{
 
       let messageWeekday = this.convention(subExp[5]);
 
-      if (messageWeekday === "undefined")
+      if (messageWeekday.includes("undefined"))
         return message;
 
       message = message
                 .concat(this.state.SPACE)
-                .concat(this.convention(subExp[5]))
+                .concat(messageWeekday)
                 .replace("$kind", "weekday");
     }
 
