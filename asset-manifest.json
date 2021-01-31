@@ -1,20 +1,23 @@
 {
   "files": {
-    "main.css": "/react-tutorial/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/react-tutorial/static/js/main.7de58ea5.chunk.js",
-    "main.js.map": "/react-tutorial/static/js/main.7de58ea5.chunk.js.map",
-    "runtime-main.js": "/react-tutorial/static/js/runtime-main.c1fe2eab.js",
-    "runtime-main.js.map": "/react-tutorial/static/js/runtime-main.c1fe2eab.js.map",
-    "static/js/2.09bcc6aa.chunk.js": "/react-tutorial/static/js/2.09bcc6aa.chunk.js",
-    "static/js/2.09bcc6aa.chunk.js.map": "/react-tutorial/static/js/2.09bcc6aa.chunk.js.map",
-    "index.html": "/react-tutorial/index.html",
-    "static/css/main.6dea0f05.chunk.css.map": "/react-tutorial/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.09bcc6aa.chunk.js.LICENSE.txt": "/react-tutorial/static/js/2.09bcc6aa.chunk.js.LICENSE.txt"
+    "main.css": "/cron.sample/static/css/main.e1e444b2.chunk.css",
+    "main.js": "/cron.sample/static/js/main.2fd15119.chunk.js",
+    "main.js.map": "/cron.sample/static/js/main.2fd15119.chunk.js.map",
+    "runtime-main.js": "/cron.sample/static/js/runtime-main.dc87caf2.js",
+    "runtime-main.js.map": "/cron.sample/static/js/runtime-main.dc87caf2.js.map",
+    "static/css/2.b72b1a0e.chunk.css": "/cron.sample/static/css/2.b72b1a0e.chunk.css",
+    "static/js/2.fcc7bfd4.chunk.js": "/cron.sample/static/js/2.fcc7bfd4.chunk.js",
+    "static/js/2.fcc7bfd4.chunk.js.map": "/cron.sample/static/js/2.fcc7bfd4.chunk.js.map",
+    "index.html": "/cron.sample/index.html",
+    "static/css/2.b72b1a0e.chunk.css.map": "/cron.sample/static/css/2.b72b1a0e.chunk.css.map",
+    "static/css/main.e1e444b2.chunk.css.map": "/cron.sample/static/css/main.e1e444b2.chunk.css.map",
+    "static/js/2.fcc7bfd4.chunk.js.LICENSE.txt": "/cron.sample/static/js/2.fcc7bfd4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c1fe2eab.js",
-    "static/js/2.09bcc6aa.chunk.js",
-    "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.7de58ea5.chunk.js"
+    "static/js/runtime-main.dc87caf2.js",
+    "static/css/2.b72b1a0e.chunk.css",
+    "static/js/2.fcc7bfd4.chunk.js",
+    "static/css/main.e1e444b2.chunk.css",
+    "static/js/main.2fd15119.chunk.js"
   ]
 }
